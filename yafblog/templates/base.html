@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <title>{% block title %}YafBlog{% endblock %}</title>
+  </head>
+  <body>
+    <div><a href="{{ url_for('blog.post_list') }}">BLOG</a></div>
+    <div>
+      <form method="get" action="/">
+        <input type="text" name="q" value="{{ search_term or '' }}">
+        <input type="submit" value="Search">
+      </form>
+    </div>
+    {% if current_user.is_active() %}
+    <div>
+      Logged in as <em>{{ current_user.username }}</em>
+      <a href="{{ url_for('auth.logout') }}">Log out</a>
+    </div>
+    {% else %}
+    <div><a href="{{ url_for('auth.login') }}">Log in</a></div>
+    {% endif %}
+    <div><a href="{{ url_for('blog.tag_list') }}">Tags</a></div>
+    
+    {% for msg in get_flashed_messages() %}
+    <div class="flash-message">
+        <strong>{{ msg }}</strong>
+    </div>
+    {% endfor %}
+
+    {% block body %}{% endblock %}
+  </body>
+</html>

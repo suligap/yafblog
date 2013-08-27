@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h1>Confirmation</h1>
+<p>Are you sure you want to delete {{ obj.__class__.__name__ }}: {{ obj }}?</p>
+<form method="post" action="">
+  <input type="submit" value="yes">
+</form>
+<form method="get" action="{{ obj.url_show }}">
+  <input type="submit" value="no">
+</form>
+{% endblock %}

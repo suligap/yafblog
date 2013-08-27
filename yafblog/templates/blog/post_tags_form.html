@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% from "_formhelpers.html" import render_field %}
+
+{% block body %}
+<h1>Tag Post: {{ post.title }}</h1>
+<form method="post" action="">
+  <dl>
+    {{ render_field(form.tags) }}
+  </dl>
+  <input type="submit" value="Tag">
+</form>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}{{ super() }} - Entries{% endblock %}
+
+{% block body %}
+{% with search_param = '?q=' + search_term if search_term else '' %}
+<a href="{{ url_for('blog.post_add') }}">New Post</a>
+<div>
+  <h1>Posts</h1>
+  {% if search_param %}
+  <div>Search results for: <em>{{ search_param[3:] }}</em></div>
+  {% elif tag %}
+  <div>Posts tagged with <em>{{ tag.name }}</em></div>
+  {% endif %}
+  <ul>
+    {% for post in pagination.items %}
+    <li>
+      <a href="{{ post.url_show }}">{{ post.title }}</a>
+    </li>
+    {% else %}
+    <div>No posts</div>
+    {% endfor %}
+  </ul>
+</div>
+<div class=pagination>
+  {% if pagination.pages > 1 %}
+      {% if pagination.has_prev %}
+      <a href="{{ url_for('blog.post_list', page=pagination.page - 1, tag_id=tag.id or None) }}{{ search_param }}">&laquo; Previous</a>
+      {% endif %}
+      <strong>{{ pagination.page }}</strong>
+      {% if pagination.has_next %}
+      <a href="{{ url_for('blog.post_list', page=pagination.page + 1, tag_id=tag.id or None) }}{{ search_param }}">Next &raquo;</a>
+      {% endif %}
+  {% endif %}
+</div>
+{% endwith %}
+{% endblock %}

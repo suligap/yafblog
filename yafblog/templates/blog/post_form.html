@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% from "_formhelpers.html" import render_field %}
+
+{% block body %}
+<h1>
+  {% if is_add %}
+  Add New Post
+  {% else %}
+  Edit Post: {{ post.title }}
+  {% endif %}
+</h1>
+<form method="post" action="">
+  <dl>
+    {{ render_field(form.added) }}
+    {{ render_field(form.title) }}
+    {{ render_field(form.slug) }}
+    {{ render_field(form.content) }}
+  </dl>
+  <input type="submit" value="{% if is_add %}Add{% else %}Change{% endif %}">
+</form>
+{% endblock %}
