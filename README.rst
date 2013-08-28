@@ -6,16 +6,16 @@ Simple blog application written with Flask and PostgreSQL.
 
 Features:
 
-    * Simple full text search
-    * Authentication for admin user
-    * Posts with tags (posts may be composed with html)
+* Simple full text search
+* Authentication for admin user
+* Posts with tags (posts may be composed with html)
 
 
 TODO:
 
-    * CSRF protection
-    * support for a markup language
-    * post preview
+* CSRF protection
+* support for a markup language
+* post preview
 
 
 Run
