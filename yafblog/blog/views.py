@@ -116,7 +116,7 @@ def post_tags(post_id):
 
 @blueprint.route('/tags')
 def tag_list():
-    tags = Tag.query.order_by(Tag.name)
+    tags = Tag.by_posts_num()
     return render_template('blog/tag_list.html', tags=tags)
 
 

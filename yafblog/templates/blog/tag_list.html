@@ -7,9 +7,11 @@
 <div>
   <h1>Tags</h1>
   <ul>
-    {% for tag in tags %}
+    {% for tag, num_posts in tags %}
     <li>
-      <a href="{{ tag.url_show }}">{{ tag.name }}</a>
+      <a href="{{ tag.url_show }}">
+        {{ tag.name }} ({{ num_posts }})
+      </a>
       {% if current_user.is_active() %}
       -
       <a href="{{ tag.url_edit }}">Edit</a>,

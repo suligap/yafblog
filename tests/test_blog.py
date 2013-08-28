@@ -148,7 +148,7 @@ class TestCaseTag(TestCaseBlog):
     def test_tag_list(self):
         r = self.client.get('/tags')
         self.assert_200(r)
-        assert 'Tag-1' in r.data
+        assert 'Tag-1 (0)' in r.data
         assert 'href="/tag/1"' in r.data
 
     def test_tag_add_unauthorized(self):
