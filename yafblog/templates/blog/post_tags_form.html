@@ -1,12 +1,14 @@
 {% extends "base.html" %}
-{% from "_formhelpers.html" import render_field %}
+{% from "_formhelpers.html" import render_field, render_errors %}
 
+{% block title %}{{ super() }} - Tags: {{ post.title }}{% endblock %}
 {% block body %}
 <h1>Tag Post: {{ post.title }}</h1>
-<form method="post" action="">
-  <dl>
-    {{ render_field(form.tags) }}
-  </dl>
-  <input type="submit" value="Tag">
+<form class="form" method="post" action="">
+  {{ render_errors(form) }}
+  {{ form.tags }}
+  <button class="btn btn-primary btn-block" type="submit">
+    Tag
+  </button>
 </form>
 {% endblock %}

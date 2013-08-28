@@ -82,6 +82,10 @@ class Post(db.Model):
         return url_for('.post_edit', post_id=self.id)
 
     @property
+    def url_no_delete(self):
+        return self.url_show
+
+    @property
     def url_tags(self):
         return url_for('.post_tags', post_id=self.id)
 
@@ -116,6 +120,10 @@ class Tag(db.Model):
     @property
     def url_show(self):
         return url_for('.post_list', tag_id=self.id)
+
+    @property
+    def url_no_delete(self):
+        return self.url_list
 
     @property
     def url_edit(self):

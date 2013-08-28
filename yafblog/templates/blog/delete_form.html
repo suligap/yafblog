@@ -1,12 +1,17 @@
 {% extends "base.html" %}
 
+{% block title %}{{ super() }} - Delete Object{% endblock %}
 {% block body %}
 <h1>Confirmation</h1>
 <p>Are you sure you want to delete {{ obj.__class__.__name__ }}: {{ obj }}?</p>
-<form method="post" action="">
-  <input type="submit" value="yes">
+<form class="form" method="post" action="">
+  <button class="btn btn-danger btn-block" type="submit">
+    Yes
+  </button>
 </form>
-<form method="get" action="{{ obj.url_show }}">
-  <input type="submit" value="no">
+<form class="form" method="get" action="{{ obj.url_no_delete }}">
+  <button class="btn btn-block btn-default" type="submit">
+    No
+  </button>
 </form>
 {% endblock %}

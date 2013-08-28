@@ -1,31 +1,131 @@
+<!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+    <style>
+      .yafblog-template {
+        padding: 40px 15px;
+        text-align: center;
+      }
+      body {
+        padding-top: 50px;
+        padding-bottom: 40px;
+        background-color: #eee;
+        font-size: 18px;
+      }
+      ul {
+        list-style: none;
+      }
+      .tag {
+        font-size: 14px;
+      }
+      .yafblog-item {
+        margin-bottom: 5px;
+        max-width: 530px;
+      }
+      .date {
+        font-size: 14px;
+      }
+      .right {
+        float: right;
+      }
+      .left {
+        float: left;
+      }
+      .form-signin {
+        max-width: 330px;
+        padding: 15px;
+        margin: 0 auto;
+      }
+      .form {
+        max-width: 430px;
+        padding: 15px;
+        margin: 0 auto;
+      }
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+      .form-signin .checkbox {
+        font-weight: normal;
+      }
+      .form-signin .form-control {
+        position: relative;
+        font-size: 16px;
+        height: auto;
+        padding: 10px;
+        -webkit-box-sizing: border-box;
+           -moz-box-sizing: border-box;
+                box-sizing: border-box;
+      }
+      .form-signin .form-control:focus {
+        z-index: 2;
+      }
+      .form-signin input[type="text"] {
+        margin-bottom: -1px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+      .control-group {
+        margin: 10px;
+      }
+      .post-item {
+        margin-bottom: 55px;
+      }
+      .post-content {
+        margin: 60px 0px 60px 0px;
+      }
+    </style>
     <title>{% block title %}YafBlog{% endblock %}</title>
   </head>
   <body>
-    <div><a href="{{ url_for('blog.post_list') }}">BLOG</a></div>
-    <div>
-      <form method="get" action="/">
-        <input type="text" name="q" value="{{ search_term or '' }}">
-        <input type="submit" value="Search">
-      </form>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">YafBlog</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="{{ url_for('blog.post_list') }}">Posts</a></li>
+            <li><a href="{{ url_for('blog.tag_list') }}">Tags</a></li>
+            {% if current_user.is_active() %}
+            <li><a href="{{ url_for('blog.post_add') }}">New Post</a></li>
+            <li><a href="{{ url_for('auth.logout') }}">{{ current_user.username }}: Log out</a></li>
+            {% else %}
+            <li><a href="{{ url_for('auth.login') }}">Log in</a></li>
+            {% endif %}
+          </ul>
+          <form class="navbar-form navbar-right" action="/" method="get">
+            <div class="form-group">
+              <input name="q" type="text" placeholder="{{ search_term or 'Search' }}" class="form-control">
+            </div>
+          </form>
+        </div><!--/.nav-collapse -->
+      </div>
     </div>
-    {% if current_user.is_active() %}
-    <div>
-      Logged in as <em>{{ current_user.username }}</em>
-      <a href="{{ url_for('auth.logout') }}">Log out</a>
-    </div>
-    {% else %}
-    <div><a href="{{ url_for('auth.login') }}">Log in</a></div>
-    {% endif %}
-    <div><a href="{{ url_for('blog.tag_list') }}">Tags</a></div>
-    
-    {% for msg in get_flashed_messages() %}
-    <div class="flash-message">
-        <strong>{{ msg }}</strong>
-    </div>
-    {% endfor %}
-
-    {% block body %}{% endblock %}
+    <div class="container">
+      <div class="yafblog-template">
+        {% for msg in get_flashed_messages() %}
+        <div class="alert alert-warning">
+          {{ msg }}
+        </div>
+        {% endfor %}
+        {% block body %}{% endblock %}
+      </div>
+    </div><!-- /.container -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
   </body>
 </html>

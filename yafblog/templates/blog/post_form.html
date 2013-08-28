@@ -1,6 +1,7 @@
 {% extends "base.html" %}
-{% from "_formhelpers.html" import render_field %}
+{% from "_formhelpers.html" import render_field, render_errors %}
 
+{% block title %}{{ super() }} - {{ post.title or 'Add New Post' }}{% endblock %}
 {% block body %}
 <h1>
   {% if is_add %}
@@ -9,13 +10,15 @@
   Edit Post: {{ post.title }}
   {% endif %}
 </h1>
-<form method="post" action="">
-  <dl>
-    {{ render_field(form.added) }}
-    {{ render_field(form.title) }}
-    {{ render_field(form.slug) }}
-    {{ render_field(form.content) }}
-  </dl>
-  <input type="submit" value="{% if is_add %}Add{% else %}Change{% endif %}">
+<form class="form" method="post" action="">
+  {{ render_errors(form) }}
+
+  {{ render_field(form.added) }}
+  {{ render_field(form.title, autofocus="") }}
+  {{ render_field(form.slug) }}
+  {{ render_field(form.content) }}
+  <button class="btn btn btn-primary btn-block" type="submit">
+    {% if is_add %}Add{% else %}Change{% endif %}
+  </button>
 </form>
 {% endblock %}

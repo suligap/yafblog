@@ -175,3 +175,8 @@ def process_obj_delete(obj):
         obj=obj,
         type_name=type_name,
     )
+
+
+@blueprint.errorhandler(404)
+def show_404(e):
+    return render_template('404.html'), 404

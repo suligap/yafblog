@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Page Not Found{% endblock %}
+{% block body %}
+  <h1>Page Not Found</h1>
+  <a href="{{ url_for('blog.post_list') }}">Please, start from here</a>
+{% endblock %}

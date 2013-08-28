@@ -24,7 +24,7 @@ class TestCaseLogin(TestCaseAuth):
     def test_login_get(self):
         r = self.client.get('/auth/login')
         self.assert_200(r)
-        assert '<form method="post" action="/auth/login"' in r.data
+        assert 'action="/auth/login"' in r.data
 
     def test_login_post_valid(self):
         r = self.login(redirect=False)
