@@ -1,7 +1,7 @@
 import os
 import datetime
 
-from sqlalchemy import event, DDL
+from sqlalchemy import func, event, DDL
 from flask import url_for
 from wtforms import validators
 
@@ -98,6 +98,16 @@ class Tag(db.Model):
 
     def __str__(self):
         return self.name
+
+    @classmethod
+    def by_posts_num(cls):
+        return (
+            db.session.query(cls,
+                             func.count(PostTag.c.post_id).label('num_posts'))
+            .outerjoin(PostTag)
+            .group_by(cls)
+            .order_by('num_posts DESC')
+        )
 
     @property
     def url_list(self):
