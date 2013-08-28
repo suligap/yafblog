@@ -8,13 +8,14 @@ Features:
 
     * Simple full text search
     * Authentication for admin user
-    * Posts with tags
+    * Posts with tags (posts may be composed with html)
 
 
 TODO:
 
     * CSRF protection
     * support for a markup language
+    * post preview
 
 
 Run
@@ -44,4 +45,4 @@ Create postgresql database
 
 Run tests
 
-    flake8 . && py.test tests/
+    flake8 . && py.test tests/ --cov=yafblog
